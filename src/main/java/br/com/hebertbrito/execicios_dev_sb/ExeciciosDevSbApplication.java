@@ -1,0 +1,13 @@
+package br.com.hebertbrito.execicios_dev_sb;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ExeciciosDevSbApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ExeciciosDevSbApplication.class, args);
+	}
+
+}
