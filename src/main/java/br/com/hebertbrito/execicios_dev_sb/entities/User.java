@@ -3,10 +3,18 @@ package br.com.hebertbrito.execicios_dev_sb.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+
+
+@jakarta.persistence.Entity
+@jakarta.persistence.Table(name = "tb_usaer")//-> "User" PALAVRA RESERVADA DO BANCO H2 POR ESSE MOTIVO TEM QUE SER RENOMEADO
 public class User implements Serializable {
 		
 	
 	private static final long serialVersionUID = 1L;
+	
+	@jakarta.persistence.Id
+	@jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
