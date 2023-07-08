@@ -1,13 +1,17 @@
 package br.com.hebertbrito.execicios_dev_sb.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import jakarta.persistence.OneToMany;
 
 
 
 
 @jakarta.persistence.Entity
-@jakarta.persistence.Table(name = "tb_usaer")//-> "User" PALAVRA RESERVADA DO BANCO H2 POR ESSE MOTIVO TEM QUE SER RENOMEADO
+@jakarta.persistence.Table(name = "tb_user")//-> "User" PALAVRA RESERVADA DO BANCO H2 POR ESSE MOTIVO TEM QUE SER RENOMEADO
 public class User implements Serializable {
 		
 	
@@ -21,6 +25,13 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+
 	public User() {
 		
 	}

@@ -15,7 +15,7 @@ package br.com.hebertbrito.execicios_dev_sb.entities;
 //		@Id
 //		@GeneratedValue(strategy = GenerationType.IDENTITY)
 //		private static final long serialVersionUID = 1L;
-//		private Integer id;
+//		private Long id;
 //		private String name;
 //		private String description;
 //		private Double price;
@@ -26,7 +26,7 @@ package br.com.hebertbrito.execicios_dev_sb.entities;
 //			
 //		}
 //
-//		public Product(Integer id, String name, String description, Double price, String imgUrl) {
+//		public Product(Long id, String name, String description, Double price, String imgUrl) {
 //			super();
 //			this.id = id;
 //			this.name = name;
@@ -39,7 +39,7 @@ package br.com.hebertbrito.execicios_dev_sb.entities;
 //			return id;
 //		}
 //
-//		public void setId(Integer id) {
+//		public void setId(Long id) {
 //			this.id = id;
 //		}
 //
