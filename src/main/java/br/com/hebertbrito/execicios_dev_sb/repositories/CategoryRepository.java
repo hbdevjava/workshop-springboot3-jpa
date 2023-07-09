@@ -6,7 +6,7 @@ import br.com.hebertbrito.execicios_dev_sb.entities.Category;
 
 
 public interface CategoryRepository extends JpaRepository <Category, Long> {
-
+	
 }
 /**
  * NESSA CASO VC ESPECÍFICO NÃO HÁ NECESSIDADE DE SE IMPLEMENTAR ESSA INTERFACE
@@ -14,3 +14,5 @@ public interface CategoryRepository extends JpaRepository <Category, Long> {
  * COMO ESTA DEFINIDO NO GENERICS <User, Long> JA VOU TEM UMA IMPLEMENTAÇAO PADRÃO 
  * PARA ESSE TIPO...
  * */
+
+// CLASSE REFATORADA (ERRO NO COMMIT)

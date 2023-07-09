@@ -31,3 +31,5 @@ public class CategoryResource {
 	}
 
 }
+
+//CLASSE REFATORADA (ERRO NO COMMIT)

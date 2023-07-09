@@ -24,3 +24,5 @@ public class CategoryService {
 		return obj.get();
 	}
 }
+
+//CLASSE REFATORADA (ERRO NO COMMIT)
