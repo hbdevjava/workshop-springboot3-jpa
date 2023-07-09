@@ -1,7 +1,9 @@
 package br.com.hebertbrito.execicios_dev_sb.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,32 +12,32 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tb_category")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	 
+
+	
+	@Transient //-> IGNORA O ATRIBUTO (private Set<Product> products = new HashSet<>());
 //	@ManyToMany
 //	@JoinColumn(name = "products_id")
-//	private Product products;
-	
+	private Set<Product> products = new HashSet<>();
+
 	public Category() {
-		
+
 	}
 
 	public Category(Long id, String name) {
 		this.id = id;
 		this.name = name;
-		//this.products = products;
+		
 	}
 
 	public Long getId() {
@@ -54,13 +56,9 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-//	public Product getProducts() {
-//		return products;
-//	}
-//
-//	public void setProducts(Product products) {
-//		this.products = products;
-//	}
+	public Set<Product> getProducts() {
+		return products;
+	}
 
 	@Override
 	public int hashCode() {
@@ -78,7 +76,5 @@ public class Category implements Serializable {
 		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
+
 }

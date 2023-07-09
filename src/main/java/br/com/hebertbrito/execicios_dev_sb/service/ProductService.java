@@ -5,22 +5,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.hebertbrito.execicios_dev_sb.entities.Category;
+import br.com.hebertbrito.execicios_dev_sb.entities.Product;
 import br.com.hebertbrito.execicios_dev_sb.repositories.CategoryRepository;
+import br.com.hebertbrito.execicios_dev_sb.repositories.ProductRepository;
 
 
 
 @Service
-public class CategoryService {
+public class ProductService {
 
 	@Autowired
-	private CategoryRepository repository;
+	private ProductRepository repository;
 
-	public List<Category> findAll() {
+	public List<Product> findAll() {
 		return repository.findAll();
 	}
 
-	public Category findById(Long id) {
-		Optional<Category> obj = repository.findById(id);
+	public Product findById(Long id) {
+		Optional<Product> obj = repository.findById(id);
 		return obj.get();
 	}
 }
