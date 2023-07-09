@@ -1,7 +1,6 @@
 package br.com.hebertbrito.execicios_dev_sb.config;
 
 
-import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import br.com.hebertbrito.execicios_dev_sb.entities.Category;
-import br.com.hebertbrito.execicios_dev_sb.entities.Order;
 import br.com.hebertbrito.execicios_dev_sb.entities.Product;
-import br.com.hebertbrito.execicios_dev_sb.entities.User;
-import br.com.hebertbrito.execicios_dev_sb.entities.enums.OrderStatus;
 import br.com.hebertbrito.execicios_dev_sb.repositories.CategoryRepository;
 import br.com.hebertbrito.execicios_dev_sb.repositories.OrderRepository;
 import br.com.hebertbrito.execicios_dev_sb.repositories.ProductRepository;
@@ -55,19 +51,34 @@ public class TestConfig implements CommandLineRunner {
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
+		p1.getCategories().add(cat2);
+		p2.getCategories().add(cat1);
+		p2.getCategories().add(cat3);
+		p3.getCategories().add(cat3);
+		p4.getCategories().add(cat3);
+		p5.getCategories().add(cat2);
 
-		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); 
-		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); 
-		
-		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1, OrderStatus.PAID);//NOTA: "U1" ESTA SENDO PASSADO, ASSIM FAZ A ASSOCIAÇAO ENTRE OS OBJETOS
-		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2, OrderStatus.WAITING_PAYMENT); 
-		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1, OrderStatus.WAITING_PAYMENT); 
-		//->  ISO 8601 FORMATO DE DATA "2019-07-22T15:21:22Z" PADRAO UTC 
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
 		
 		
-		userRepository.saveAll(Arrays.asList(u1, u2));//-> RECEBE QUALQUE OBJ QUE SEJA ITERAVEL (AQUI NO CADO UM ARRAY)
-		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		
+		
+		
+		
+
+//		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); 
+//		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); 
+//		
+//		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1, OrderStatus.PAID);//NOTA: "U1" ESTA SENDO PASSADO, ASSIM FAZ A ASSOCIAÇAO ENTRE OS OBJETOS
+//		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2, OrderStatus.WAITING_PAYMENT); 
+//		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1, OrderStatus.WAITING_PAYMENT); 
+//		//->  ISO 8601 FORMATO DE DATA "2019-07-22T15:21:22Z" PADRAO UTC 
+//		
+//		
+//		userRepository.saveAll(Arrays.asList(u1, u2));//-> RECEBE QUALQUE OBJ QUE SEJA ITERAVEL (AQUI NO CADO UM ARRAY)
+//		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+//		
 	}
 
 }
