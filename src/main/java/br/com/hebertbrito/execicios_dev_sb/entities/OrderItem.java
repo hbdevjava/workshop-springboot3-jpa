@@ -2,6 +2,8 @@ package br.com.hebertbrito.execicios_dev_sb.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.hebertbrito.execicios_dev_sb.entities.pk.OrderItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -13,7 +15,9 @@ public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
+	//-> SEMPRE QUE CRIAR UMA CLASSE AUXILIAR QUE SEJA O ID COMPOSTO, VC TEM QUE INSTACIAR A CLASSE E FAZER 
+	//-> E ANOTAR COM @eMBEDDEDiD....
 
 	private Integer quantity;
 	private Double price;
@@ -28,7 +32,8 @@ public class OrderItem implements Serializable {
 		this.quantity = quantity;
 		this.price = price;
 	}
-
+	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
