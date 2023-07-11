@@ -8,6 +8,19 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+/**
+ * @Embeddable do JPA:
+ * Ex:
+ * Podemos usar a anotação @Embeddable para criar uma classe que representa um
+ * endereço e incorporá-la em outras entidades que precisam de um endereço1.
+ * Podemos usar a anotação @Embeddable para criar uma classe que representa um
+ * número de telefone e incorporá-la em outras entidades que precisam de um
+ * número de telefone2. Podemos usar a anotação @Embeddable para criar uma
+ * classe que representa um intervalo de tempo e incorporá-la em outras
+ * entidades que precisam de um intervalo de tempo3.
+ * 
+ */
+
 @Embeddable
 public class OrderItemPK implements Serializable {
 	private static final long serialVersionUID = 1L;

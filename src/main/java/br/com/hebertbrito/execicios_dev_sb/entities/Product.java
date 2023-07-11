@@ -5,8 +5,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import br.com.hebertbrito.execicios_dev_sb.entities.pk.OrderItemPK;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 @Entity
@@ -38,6 +41,8 @@ public class Product implements Serializable {
 		//-> SET É UMA INTERFACE E NAO PODE SER INSTANCIADA ENTAO SE USA HashSet QUE É UMA CLASSE CORRESPONDENTE A ESSA INTERFACE
 		//-> OUTRO EX: list -> ArraysList
 		
+		@OneToMany(mappedBy = "id.product")
+		private Set<OrderItem> items = new HashSet<>();//-> SET É UMA COLEÇAO QUE NÃO ADMITE REPETIÇAO DO MESMO ITEM;
 		
 		public Product() {
 			
@@ -100,10 +105,13 @@ public class Product implements Serializable {
 			return categories;
 		}
 
-		
-
-		public static long getSerialversionuid() {
-			return serialVersionUID;
+		@JsonIgnore
+		public Set<Order> getOrders() {//-> Orders nome projetado no diagrama;
+			Set<Order> set = new HashSet<>();
+			for (OrderItem orderItem : items) {
+				set.add(orderItem.getOrder());
+			}
+			return set;
 		}
 
 		@Override

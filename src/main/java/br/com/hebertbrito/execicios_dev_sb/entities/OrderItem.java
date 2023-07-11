@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_order_item")
+@Table(name = "tb_order_item")//-> NOME DA ENTIDADE NO BANCO DE DADOS
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,8 +27,8 @@ public class OrderItem implements Serializable {
 
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
 		super();
-		id.setOrder(order);
-		id.setProduct(product);
+		id.setOrder(order);//-> INSTANCIANDO UMA ORDER
+		id.setProduct(product);//-> INSTANCIANDO UMA PRODUCT
 		this.quantity = quantity;
 		this.price = price;
 	}
@@ -41,6 +41,7 @@ public class OrderItem implements Serializable {
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
+	
 
 	public Product getProduct() {
 		return id.getProduct();
