@@ -1,6 +1,7 @@
 package br.com.hebertbrito.execicios_dev_sb.entities;
 
 import java.io.Serializable;
+
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
@@ -9,6 +10,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.hebertbrito.execicios_dev_sb.entities.enums.OrderStatus;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +18,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
+/**
+ * SOBRE ->  CascadeType.ALL é uma opção de cascata que permite que todas as operações
+ * de cascata sejam aplicadas a uma associação. Isso significa que quando uma
+ * operação é executada em uma entidade, as operações correspondentes são
+ * executadas em todas as entidades associadas. Por exemplo, se você excluir uma
+ * entidade pai, todas as entidades filhas associadas também serão excluídas.
+ * 
+ */
 
 @Entity
 @Table(name = "tb_order")
@@ -35,10 +47,12 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
-	
-	
+
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
+
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Payment payment;
 
 	public Order() {
 
@@ -81,16 +95,23 @@ public class Order implements Serializable {
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		if(orderStatus != null) {
+		if (orderStatus != null) {
 			this.orderStatus = orderStatus.getCode();
 		}
 	}
-	
+
 	public Set<OrderItem> getItems() {
 		return items;
 	}
-	
-	
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
