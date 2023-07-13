@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.hebertbrito.execicios_dev_sb.entities.User;
@@ -24,6 +25,7 @@ public class UserService {
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));//RETORNR O OBJ CASO NA RETORNE A EXCECAO
+		
 	}
 	
 	public User insert(User obj) {
@@ -31,7 +33,13 @@ public class UserService {
 	}
 	
 	public void delete(Long id) {
+		try {
 		repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public User upDate(Long id, User obj) {
