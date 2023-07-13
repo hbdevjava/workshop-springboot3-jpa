@@ -7,5 +7,7 @@ public class ResourceNotFoundException extends RuntimeException {
 	public ResourceNotFoundException(Object id) { //CONSTRUTOR COM ARGUMENTO
 		super("Resource NotFound. Id " + id );
 	}
+	
+	
 
 }
