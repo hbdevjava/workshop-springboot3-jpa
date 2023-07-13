@@ -12,6 +12,7 @@ import br.com.hebertbrito.execicios_dev_sb.entities.User;
 import br.com.hebertbrito.execicios_dev_sb.repositories.UserRepository;
 import br.com.hebertbrito.execicios_dev_sb.service.exceptions.DataBaseException;
 import br.com.hebertbrito.execicios_dev_sb.service.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 
 @Service
@@ -36,7 +37,7 @@ public class UserService {
 	
 	public void delete(Long id) {
 		try {
-		repository.deleteById(id);
+			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 		} catch (DataIntegrityViolationException e) {
@@ -45,9 +46,13 @@ public class UserService {
 	}
 	
 	public User upDate(Long id, User obj) {
-		User entity = repository.getReferenceById(id);
-		updateData(entity, obj);
-		return repository.save(entity);
+		try {
+			User entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		}catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(User entity, User obj) {
